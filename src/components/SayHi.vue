@@ -1,11 +1,16 @@
 <script>
 import { postApi, userApi } from '@/api/api'
 import UserList from '@component/UserList.vue'
+import CommonHi from '@/mixin/common_hi.js'
 
 export default {
   name: 'SayHi',
+  mixins: [CommonHi],
   components: {
     UserList
+  },
+  mounted () {
+    alert(this.hi('from SayHi'))
   },
   data () {
     return {
@@ -15,10 +20,42 @@ export default {
       updatedUser: null,
       userId: 1,
       directUser: null,
-      requestStatus: ''
+      requestStatus: '',
+      firstName: '张',
+      lastName: '三',
+      price: 100,
+      quantity: 2
+    }
+  },
+  watch: {
+    message: function (value) {
+      alert('watch:' + value)
+    }
+  },
+  computed: {
+    reverseMessage: function () {
+      return this.message.split('').reverse().join('')
+    },
+    // 最简单的计算属性（只读）
+    fullName () {
+      return this.firstName + ' ' + this.lastName
+    },
+
+    // 带 getter 和 setter 的计算属性
+    totalPrice: {
+      get () {
+        return this.price * this.quantity
+      },
+      set (newValue) {
+        // 当修改 totalPrice 时，自动更新 quantity
+        this.quantity = Math.floor(newValue / this.price)
+      }
     }
   },
   methods: {
+    reverseMessage_method: function () {
+      return this.message.split('').reverse().join('')
+    },
     // 使用封装的API方法进行GET请求
     async getPosts () {
       try {
@@ -113,7 +150,16 @@ export default {
 
 <template>
   <div class="hello" >
-    {{message}}
+    原始值: {{message}}<br>
+    计算后的值(会缓存): {{reverseMessage}}<br>
+    普通函数(没有缓存): {{reverseMessage_method()}}
+
+    <div>
+      通过计算的属性:
+      <p>全名: {{ fullName }}</p>
+      <p>总价: {{ totalPrice }} 元</p>
+      <button @click="totalPrice = 300">修改总价为300</button>
+    </div>
     <h1>Vue2 HTTP 请求示例</h1>
 
     <div class="actions">
