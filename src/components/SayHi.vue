@@ -205,7 +205,7 @@ export default {
     </div>
 
     <!-- 用户列表组件 -->
-    <UserList  color="green" title="nice" likes=999999 isPublished=false commentIds="[106, 52, 84, 138]" author="{'name': 'metrox', 'sex': 'male'}" />
+    <UserList class="new-class"  color="green" title="nice" likes=999999 isPublished=false commentIds="[106, 52, 84, 138]" author="{'name': 'metrox', 'sex': 'male'}" />
   </div>
 </template>
 
