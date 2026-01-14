@@ -205,11 +205,19 @@ export default {
     </div>
 
     <!-- 用户列表组件 -->
-    <UserList />
+    <UserList  color="green" title="nice" likes=999999 isPublished=false commentIds="[106, 52, 84, 138]" author="{'name': 'metrox', 'sex': 'male'}" />
   </div>
 </template>
 
 <style scoped>
+.new-class {
+  max-width: 1000px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px auto;
+}
+
 .hello {
   color: red;
   font-size: 32px;

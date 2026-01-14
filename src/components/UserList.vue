@@ -1,6 +1,6 @@
 <template>
   <div class="user-list">
-    <h3>用户列表</h3>
+    <h3>用户列表-{{title}}-{{likes}}-{{isPublished}}-{{commentIds}}-{{author}}</h3>
     <div v-if="loading" class="loading">加载中...</div>
     <div v-else-if="error" class="error">加载失败: {{ error }}</div>
     <div v-else>
@@ -11,8 +11,8 @@
           <button @click="showUserDetails(user.id)" class="btn btn-sm">查看详情</button>
         </li>
       </ul>
-
-      <div v-if="selectedUser" class="user-details">
+;
+      <div v-if="selectedUser" class="user-details" v-bind:style="{color: color}" >
         <h4>用户详情</h4>
         <p><strong>姓名:</strong> {{ selectedUser.name }}</p>
         <p><strong>邮箱:</strong> {{ selectedUser.email }}</p>
@@ -34,6 +34,17 @@ export default {
       selectedUser: null,
       loading: false,
       error: null
+    }
+  },
+  props: {
+    title: String,
+    likes: Number,
+    isPublished: Boolean,
+    commentIds: Array,
+    author: Object,
+    color: {
+      type: String,
+      default: '#3a86ff'
     }
   },
   mounted () {
