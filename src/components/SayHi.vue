@@ -3,6 +3,16 @@ import { postApi, userApi } from '@/api/api'
 import UserList from '@component/UserList.vue'
 import CommonHi from '@/mixin/common_hi.js'
 
+import Vue from 'vue'
+Vue.component('cmpslot', {
+  data: function () {
+    return {
+      count: 0
+    }
+  },
+  template: '<div><slot name="slot_top"></slot><slot></slot><slot name="slot_bottom"></slot></div>'
+})
+
 export default {
   name: 'SayHi',
   mixins: [CommonHi],
@@ -206,6 +216,16 @@ export default {
 
     <!-- 用户列表组件 -->
     <UserList class="new-class"  color="green" title="nice" likes=999999 isPublished=false commentIds="[106, 52, 84, 138]" author="{'name': 'metrox', 'sex': 'male'}" />
+
+    <cmpslot>
+      <p slot="slot_top">
+        Top of slot
+      </p>
+      not name slot data here
+      <p slot="slot_bottom">
+        Bottom of slot
+      </p>
+    </cmpslot>
   </div>
 </template>
 
